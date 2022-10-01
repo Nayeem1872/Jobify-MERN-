@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes'
  
  const errorHandlerMiddleware = (err,req,res,next)=> {
-    console.log(err.message)
+    console.log(err)
 
 
     const defaultError = {
@@ -20,5 +20,5 @@ import { StatusCodes } from 'http-status-codes'
     }
      //res.status(defaultError.statusCode).json({msg:err})
    res.status(defaultError.statusCode).json({msg:defaultError.msg})
- }
+ } 
  export default errorHandlerMiddleware

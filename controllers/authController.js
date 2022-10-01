@@ -1,39 +1,21 @@
 import User from '../models/User.js'
 import { StatusCodes } from 'http-status-codes'
+import {BadRequestError} from '../errors/index.js'
 
-class CustomAPIError extends Error{
-    constructor(message){
-    super(message)
-    
-    }
-}
-
-class BadRquestError extends CustomAPIError{
-    constructor(message){
-        super(message)
-        this.statusCode = StatusCodes.BAD_REQUEST
-        }
-
-}
-
-class NotFoundError extends CustomAPIError{
-    constructor(message){
-        super(message)
-        this.statusCode = StatusCodes.NOT_FOUND
-        }
-
-}
 
 const register =async (req , res)=>{
    
     const {name,email,password} = req.body
     
     if(!name ||!email ||!password){
-        throw new BadRquestError('Please provide all Values correctly')
+        throw new BadRequestError('Please provide all Values correctly')
     }
 
-
-    const user = await User.create(name,email,password)
+    const userAlreadyExists = await User.findOne({ email })
+    if (userAlreadyExists) {
+      throw new BadRequestError('Email already in use')
+    }
+    const user = await User.create({name,email,password})
     res.status(StatusCodes.OK).json({user })
 
     
@@ -44,6 +26,7 @@ const login = (req , res)=>{
 }
 const updateUser = (req , res)=>{
     res.send('updateUser')
+    User.findOneAndUpdate
 }
 
 export { register, login, updateUser}
