@@ -23,11 +23,15 @@ app.get('/',(req,res)=>{
     // throw new Error('error')
     res.send('Welcome')
 })
+app.get('/api/v1',(req,res)=>{
+    // throw new Error('error')
+    res.json({ msg: 'Api' })
+})
 
 app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/jobs',jobsRouter)
 
-
+// console.log('hello');
 //middleware
 
 app.use(notFoundMiddleware)
