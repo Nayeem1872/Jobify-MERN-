@@ -7,4 +7,4 @@ const connectDB= (url)=>{
     
 }
 
-export default connectDB;
+export default connectDB; 
