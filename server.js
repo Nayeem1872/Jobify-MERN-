@@ -10,7 +10,7 @@ import authRouter from './routes/authRoutes.js';
 import jobsRouter from './routes/jobsRoutes.js';
 
  
-
+ 
 
 const app = express()
 
